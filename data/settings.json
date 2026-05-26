@@ -1,5 +1,6 @@
 {
     "old_id_system": true,
     "enable_exams_and_tsts": true,
-    "disable_members_index": true
+    "disable_members_index": true,
+    "exams_mono_name": true
 }
