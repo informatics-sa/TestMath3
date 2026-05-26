@@ -17,7 +17,7 @@ Always check the files for examples of the formatting.
 - Array: JSON array `[...]`
 - Dictionary/Object: JSON object `{...}`
 #### Custom defined
-- Date: String, gregorian date in[ ](https://xkcd.com/1179/)[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+- Date: String, gregorian date in format `YYYY/M/D`
 - URL: String, starts with prefix `https://` and without suffix `/`
 - Email: String, an email
 
@@ -42,14 +42,13 @@ An array of people, each person has the following:
 
 ## [`/data/participations.json`](/data/participations.json)
 An array of olympiads SIT participated in, each olympiad has the following:
-- `name`: String, An id of an olympiad that exists in `olympiads.json`
+- `id`: String, An id of an olympiad that exists in `olympiads.json`
 - `year`: Integer, year
 - `country`: String, the 2-letters country code of the host country of the olympiad.
 - `start`: Date, The start day of the olympiad
 - `end`: Date, the end day of the olympiad
-- `participants`: Dictionary of `<member_id>: <award_name>` of the participants __in SAU order__.
-    - `<award name>`: (`gold`/`silver`/`bronze`/`hm`) (null in case of no award)
-- `scores`: Dictionary of `<member_id>: <scores_array>` **(optional)**
+- `participants`: Dictionary of `<member ID>: <award name>`
+    - `<award name>`: (`gold`/`silver`/`bronze`/`hounarablemention`) (null in case of no award)
 - `website`: URL, Olympiad website of that specific year **(nullable)**
 - `online`: Boolean, indicates if Saudi participated online or not, default is False **(optional)**
 
@@ -86,40 +85,26 @@ A dictionary of exam IDs, where every exam has:
 - `participants`: Dictionary of student ID and an array of floats which is score per task
 
 ## [`/data/tsts.json`](/data/tsts.json)
-A dictionary of year and olympiad IDs, and every olympiad ID contains a set of exams, and set of excluded students, for example:
+A dictionary of year and olympiad IDs, and every olympiad ID contains a set of exams, and set of execluded students, for example:
 ```json
 {
     "2025": {
-        "_general_excluded": ["sultan_alaiban"],
+        "_general_execluded": ["sultan_alaiban"],
         "ioi": {
             "exams": ["exam1", "exam2"],
-            "min_birthdate": "2009-06-30",
+            "min_birthdate": "2009/6/30",
             "female_only": false,
-            "excluded": ["muaath_alqarni", "ali_alsalman"]
-        }
-    }
-}
-```
-additionally, if the TSTs for a certain olympiad is weighted, you can use a dictionary of exam ID to weight instead of an array in the `exams` field. for example:
-```json
-{
-    "2026": {
-        "ioi": {
-            "exams": {
-                "exam1": 0.2,
-                "exam2": 0.4,
-                "exam3": 0.4
-            }
+            "execluded": ["muaath_alqarni", "ali_alsalman"]
         }
     }
 }
 ```
 
 Additional rules (Optional):
-- `excluded`: Array, of strings student ID
+- `execluded`: Array, of strings student ID
 - `min_graduation`: Integer, minimum graduation year to be eligable
 - `female_only`: Boolean, true if the competition is female only
-- `min_birthdate`: Date, the minimum birthdate for eligibility
+- `min_birthdate`: Date, the minimum birthdate for eligibility **(future)**
 
 
 # Constant files
